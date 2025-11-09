@@ -1,0 +1,9 @@
+# .gitignore - files to be ignored by git
+
+
+# ----- VIM STUFF -----
+.*.swp
+
+
+# ----- BUILD ARTIFACTS -----
+build

@@ -1,0 +1,7 @@
+koko
+
+-h ............ Show this help text
+-l ............ Lexer mode
+-p ............ Parser mode
+-v ............ Show version info
+
