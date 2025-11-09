@@ -6,6 +6,7 @@
 
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
 
 Void adv_ch_buf(ChBuf *ch_buf, Err *err) {
     if (ch_buf->curs >= ch_buf->sz) {
@@ -65,3 +66,32 @@ Ch read_ch_buf(ChBuf *ch_buf) {
     return ch_buf->data[ch_buf->curs];
 }
 
+U16 scan_until(ChBuf *ch_buf, Ch stop, Err *err) {
+    U16 return_data = 0;
+    while (ch_buf->curs < ch_buf->sz) {
+        if (ch_buf->data[ch_buf->curs] == stop)
+            return return_data;
+        return_data++;
+        ch_buf->curs++;
+    }
+    THROW(err, ERR_BOUNDS, "Out-of-bounds character buffer access attempted at byte offset %ld", ch_buf->curs + 1)
+    return 0;
+}
+
+U16 scan_while(ChBuf *ch_buf, Ch *legal, Err *err) {
+    U16 return_data = 0;
+    while (ch_buf->curs < ch_buf->sz) {
+        for (int i; i < strlen(legal); i++) {
+            if (ch_buf->data[ch_buf->curs] == legal[i])
+                return return_data;
+        }
+        return_data++;
+        ch_buf->curs++;
+    }
+    THROW(err, ERR_BOUNDS, "Out-of-bounds character buffer access attempted at byte offset %ld", ch_buf->curs + 1)
+    return 0;
+}
+
+Ch *tell_ch_buf(ChBuf *ch_buf) {
+    return ch_buf->data + ch_buf->curs;
+}

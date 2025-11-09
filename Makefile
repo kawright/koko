@@ -8,17 +8,20 @@ CC := gcc
 CC_OPTS := \
 	-Wall \
 	-Werror \
-	-Isrc
+	-Isrc \
+	-DDEBUG_MODE_ENABLED
 
 # ----- MANIFEST -----
 
 HEADER_ONLY_FILES := \
-	src/core.h
+	src/core.h \
+	src/debug.h
 OBJS := \
 	build/obj/argvp.o \
 	build/obj/chbuf.o \
 	build/obj/err.o \
-	build/obj/statout.o
+	build/obj/statout.o \
+	build/obj/tok.o
 
 # ----- REAL TARGETS -----
 
